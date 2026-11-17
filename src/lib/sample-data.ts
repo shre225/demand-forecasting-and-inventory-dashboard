@@ -25,12 +25,12 @@ export type Product = {
 };
 
 /** Sample retail records used for the demonstration (not live business data). */
-export const PRODUCTS: Product[] = [
+export const PRODUCTS: [Product, ...Product[]] = [
   { sku: "SKU-104", name: "Wireless Mouse", category: "Electronics", store: "Delhi", onHand: 18, dailyAvg: 2.1, leadTimeDays: 10, safetyStock: 15 },
   { sku: "SKU-221", name: "Steel Bottle", category: "Home & Kitchen", store: "Ghaziabad", onHand: 12, dailyAvg: 1.4, leadTimeDays: 7, safetyStock: 10 },
   { sku: "SKU-087", name: "USB-C Cable", category: "Electronics", store: "Noida", onHand: 64, dailyAvg: 1.8, leadTimeDays: 9, safetyStock: 14 },
   { sku: "SKU-315", name: "Notebook A5", category: "Stationery", store: "Delhi", onHand: 145, dailyAvg: 3.0, leadTimeDays: 7, safetyStock: 20 },
-  { sku: "SKU-142", name: "Bluetooth Speaker", category: "Electronics", store: "Ghaziabad", onHand: 22, dailyAvg: 1.2, leadTimeDays: 12, safetyStock: 8 },
+  { sku: "SKU-142", name: "Bluetooth Speaker", category: "Electronics", store: "Ghaziabad", onHand: 20, dailyAvg: 1.2, leadTimeDays: 12, safetyStock: 8 },
   { sku: "SKU-178", name: "Desk Lamp", category: "Home & Kitchen", store: "Delhi", onHand: 30, dailyAvg: 0.9, leadTimeDays: 10, safetyStock: 6 },
   { sku: "SKU-203", name: "Ceramic Mug Set", category: "Home & Kitchen", store: "Noida", onHand: 55, dailyAvg: 1.6, leadTimeDays: 6, safetyStock: 10 },
   { sku: "SKU-256", name: "Gel Pen Pack", category: "Stationery", store: "Ghaziabad", onHand: 30, dailyAvg: 4.2, leadTimeDays: 5, safetyStock: 12 },
@@ -121,7 +121,7 @@ const PREVIEW_MONTHS = [
 export function summarize(filters: Filters) {
   const share = CATEGORY_SHARE[filters.category] * STORE_SHARE[filters.store];
   const months = RANGE_MONTHS[filters.dateRange];
-  const trend = MONTHLY_TREND.map((v, i) => Math.max(4, v + CATEGORY_WOBBLE[filters.category][i]));
+  const trend = MONTHLY_TREND.map((v, i) => Math.max(4, v + (CATEGORY_WOBBLE[filters.category][i] ?? 0)));
   const monthWeights = MONTHLY_TREND.map((v) => v + 60);
   const totalWeight = monthWeights.reduce((a, b) => a + b, 0);
   const rangeWeight = monthWeights.slice(12 - months).reduce((a, b) => a + b, 0);
@@ -137,7 +137,7 @@ export function summarize(filters: Filters) {
     trend: trend.slice(12 - months),
     health: { healthy, low, over },
     preview: PREVIEW_MONTHS.map((m) => ({ ...m, units: Math.max(1, Math.round(m.units * share)) })),
-    history: FORECAST_HISTORY.map((v, i) => Math.max(4, v + CATEGORY_WOBBLE[filters.category][i] / 2)),
+    history: FORECAST_HISTORY.map((v, i) => Math.max(4, v + (CATEGORY_WOBBLE[filters.category][i] ?? 0) / 2)),
   };
 }
 

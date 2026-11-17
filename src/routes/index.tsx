@@ -63,29 +63,29 @@ function Overview() {
       </div>
 
       <Panel title="Items requiring attention">
-        <div className="mt-6 overflow-x-auto">
+        <div className="mt-5 overflow-x-auto">
           <table className="w-full min-w-[640px] text-left text-[11px]">
             <thead className="text-subtle-foreground">
               <tr>
-                <th className="w-[170px] pb-3 font-normal">SKU</th>
-                <th className="w-[420px] pb-3 font-normal">Product</th>
-                <th className="w-[180px] pb-3 font-normal">On hand</th>
-                <th className="w-[210px] pb-3 font-normal">Reorder point</th>
-                <th className="pb-3 font-normal">Status</th>
+                <th className="w-[170px] pb-2.5 font-normal">SKU</th>
+                <th className="w-[420px] pb-2.5 font-normal">Product</th>
+                <th className="w-[180px] pb-2.5 font-normal">On hand</th>
+                <th className="w-[210px] pb-2.5 font-normal">Reorder point</th>
+                <th className="pb-2.5 font-normal">Status</th>
               </tr>
             </thead>
             <tbody className="text-foreground">
               {rows.map((r) => (
                 <tr key={r.sku}>
-                  <td className="py-[7px]">
+                  <td className="py-[5px]">
                     <Link to="/inventory" onClick={() => setSelectedSku(r.sku)} className="hover:underline">
                       {r.sku}
                     </Link>
                   </td>
-                  <td className="py-[7px]">{r.name}</td>
-                  <td className="py-[7px]">{r.onHand}</td>
-                  <td className="py-[7px]">{Math.round(r.reorderPoint)}</td>
-                  <td className="py-[7px]">{r.status}</td>
+                  <td className="py-[5px]">{r.name}</td>
+                  <td className="py-[5px]">{r.onHand}</td>
+                  <td className="py-[5px]">{Math.round(r.reorderPoint)}</td>
+                  <td className="py-[5px]">{r.status}</td>
                 </tr>
               ))}
               {rows.length === 0 && (

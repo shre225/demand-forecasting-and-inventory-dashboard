@@ -68,7 +68,7 @@ function FilterSelect<K extends keyof Filters>({
 
 function FilterBar() {
   return (
-    <div className="sw-card mt-[22px] grid grid-cols-1 gap-3 px-6 py-[18px] text-[14px] text-muted-foreground sm:grid-cols-[340px_360px_1fr]">
+    <div className="sw-card mt-[22px] grid grid-cols-1 gap-3 px-6 py-[17px] text-[14px] text-muted-foreground sm:grid-cols-[340px_360px_1fr]">
       <FilterSelect label="Date range" field="dateRange" options={DATE_RANGES} />
       <FilterSelect label="Category" field="category" options={CATEGORIES} />
       <FilterSelect label="Store" field="store" options={STORES} />
@@ -83,7 +83,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main className="px-5 pt-7 pb-5 md:ml-[246px] md:px-[39px]">
         <header>
           <h1 className="text-[24px] font-bold text-foreground">Inventory Planning Workspace</h1>
-          <p className="mt-2 text-[11px] text-subtle-foreground">
+          <p className="mt-1.5 text-[11px] text-subtle-foreground">
             Sample retail dataset &nbsp;•&nbsp; Demo view &nbsp;•&nbsp; Last refreshed: 04 Nov 2026
           </p>
         </header>

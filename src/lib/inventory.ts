@@ -55,17 +55,17 @@ export function movingAverageForecast(series: number[], horizon = 3, window = 3)
 
 export function mae(actual: number[], forecast: number[]) {
   const n = actual.length;
-  return actual.reduce((s, a, i) => s + Math.abs(a - forecast[i]), 0) / n;
+  return actual.reduce((s, a, i) => s + Math.abs(a - (forecast[i] ?? 0)), 0) / n;
 }
 
 export function rmse(actual: number[], forecast: number[]) {
   const n = actual.length;
-  return Math.sqrt(actual.reduce((s, a, i) => s + (a - forecast[i]) ** 2, 0) / n);
+  return Math.sqrt(actual.reduce((s, a, i) => s + (a - (forecast[i] ?? 0)) ** 2, 0) / n);
 }
 
 /** MAPE only over periods where actual demand is not zero (the denominator would be invalid). */
 export function mape(actual: number[], forecast: number[]): number | null {
-  const valid = actual.map((a, i) => [a, forecast[i]] as const).filter(([a]) => a !== 0);
+  const valid = actual.map((a, i) => [a, forecast[i] ?? 0] as const).filter(([a]) => a !== 0);
   if (valid.length === 0) return null;
   return (100 / valid.length) * valid.reduce((s, [a, f]) => s + Math.abs(a - f) / a, 0);
 }
@@ -76,8 +76,8 @@ export function rollingHoldout(series: number[], holdout: number, window: number
   const forecast: number[] = [];
   for (let t = series.length - holdout; t < series.length; t++) {
     const [f] = movingAverageForecast(series.slice(0, t), 1, window);
-    actual.push(series[t]);
-    forecast.push(f);
+    actual.push(series[t] ?? 0);
+    forecast.push(f ?? 0);
   }
   return { actual, forecast };
 }

@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Stock and forecast formulas live as pure functions in `src/lib/inventory.ts` and are covered by `src/test/inventory.test.ts`; pages only display their results, so numbers stay checkable against the report.
+- Shared filter, settings and selected-SKU state lives in `StockwiseProvider` (`src/lib/stockwise-store.tsx`), mounted with the dashboard shell in `__root.tsx`, so every page agrees on the same numbers.
+- Sample data stays in `src/lib/sample-data.ts`; the first rows mirror the report's illustrative screens so default views match the figures.

@@ -110,7 +110,7 @@ export function LineChart({
       </svg>
       {series.flatMap((s) =>
         (s.dots ?? []).filter((i) => i < s.values.length).map((i) => {
-          const [x, y] = toPoint(s.values[i], i, s.values.length);
+          const [x, y] = toPoint(s.values[i] ?? 0, i, s.values.length);
           return (
             <span
               key={`${s.label}-${i}`}

@@ -49,12 +49,12 @@ function InventoryPage() {
           <table className="w-full min-w-[700px] text-left text-[11px]">
             <thead className="text-subtle-foreground">
               <tr>
-                <th className="w-[130px] pb-[38px] pl-1.5 font-normal">SKU</th>
-                <th className="w-[370px] pb-[38px] font-normal">Product</th>
-                <th className="w-[180px] pb-[38px] font-normal">On hand</th>
-                <th className="w-[160px] pb-[38px] font-normal">Daily avg.</th>
-                <th className="w-[170px] pb-[38px] font-normal">Days cover</th>
-                <th className="pb-[38px] font-normal">Action</th>
+                <th className="w-[130px] pb-6 pl-1.5 font-normal">SKU</th>
+                <th className="w-[370px] pb-6 font-normal">Product</th>
+                <th className="w-[180px] pb-6 font-normal">On hand</th>
+                <th className="w-[160px] pb-6 font-normal">Daily avg.</th>
+                <th className="w-[170px] pb-6 font-normal">Days cover</th>
+                <th className="pb-6 font-normal">Action</th>
               </tr>
             </thead>
             <tbody className="text-foreground">
@@ -65,12 +65,12 @@ function InventoryPage() {
                   data-selected={r.sku === selected.sku}
                   onClick={() => setSelectedSku(r.sku)}
                 >
-                  <td className="py-[15px] pl-1.5">{r.sku}</td>
-                  <td className="py-[15px]">{r.name}</td>
-                  <td className="py-[15px]">{r.onHand}</td>
-                  <td className="py-[15px]">{r.dailyAvg.toFixed(1)}</td>
-                  <td className="py-[15px]">{r.daysCover === null ? "—" : r.daysCover.toFixed(1)}</td>
-                  <td className="py-[15px]">{r.status}</td>
+                  <td className="py-[13px] pl-1.5">{r.sku}</td>
+                  <td className="py-[13px]">{r.name}</td>
+                  <td className="py-[13px]">{r.onHand}</td>
+                  <td className="py-[13px]">{r.dailyAvg.toFixed(1)}</td>
+                  <td className="py-[13px]">{r.daysCover === null ? "—" : r.daysCover.toFixed(1)}</td>
+                  <td className="py-[13px]">{r.status}</td>
                 </tr>
               ))}
               {rows.length === 0 && (

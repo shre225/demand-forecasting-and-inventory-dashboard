@@ -70,8 +70,8 @@ function ReportsPage() {
                 <tr key={i} className="border-t border-border">
                   <td className="py-2.5">{EVALUATION_SERIES.length - HOLDOUT + i + 1}</td>
                   <td className="py-2.5">{a}</td>
-                  <td className="py-2.5">{forecast[i].toFixed(2)}</td>
-                  <td className="py-2.5">{(a - forecast[i]).toFixed(2)}</td>
+                  <td className="py-2.5">{(forecast[i] ?? 0).toFixed(2)}</td>
+                  <td className="py-2.5">{(a - (forecast[i] ?? 0)).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
