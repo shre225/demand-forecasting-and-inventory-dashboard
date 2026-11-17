@@ -39,7 +39,7 @@ function InventoryPage() {
         title="Inventory status by SKU"
         action={
           all.length > rows.length ? (
-            <Link to="/products" className="text-[11px] text-subtle-foreground hover:underline">
+            <Link to="/products" className="whitespace-nowrap text-[11px] text-subtle-foreground hover:underline">
               View all {all.length} SKUs
             </Link>
           ) : null

@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useRef, type ReactNode } from "react";
 import { useStockwise } from "@/lib/stockwise-store";
 import { CATEGORIES, DATE_RANGES, STORES, type Filters } from "@/lib/sample-data";
 
@@ -13,13 +13,24 @@ const NAV = [
 ] as const;
 
 function Sidebar() {
+  const navRef = useRef<HTMLElement>(null);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  // On phones the menu is a horizontal strip: keep the current page's tab in view.
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav || nav.scrollWidth <= nav.clientWidth) return;
+    const active = nav.querySelector<HTMLElement>('[data-status="active"]');
+    if (active) nav.scrollTo({ left: active.offsetLeft - nav.clientWidth / 2 + active.offsetWidth / 2 });
+  }, [pathname]);
+
   return (
     <aside className="bg-sidebar text-sidebar-foreground md:fixed md:inset-y-0 md:left-0 md:w-[246px]">
       <div className="px-7 pt-6 pb-4 md:pb-0">
         <div className="text-[24px] font-bold tracking-wide text-sidebar-primary">STOCKWISE</div>
         <div className="mt-1.5 text-[11px] text-sidebar-foreground">Demand &amp; Inventory</div>
       </div>
-      <nav className="flex gap-2 overflow-x-auto px-4 pb-4 md:mt-[37px] md:flex-col md:gap-[18px] md:overflow-visible md:pb-0">
+      <nav ref={navRef} className="relative flex gap-2 overflow-x-auto px-4 pb-4 md:mt-[37px] md:flex-col md:gap-[18px] md:overflow-visible md:pb-0">
         {NAV.map((item) => (
           <Link
             key={item.to}
